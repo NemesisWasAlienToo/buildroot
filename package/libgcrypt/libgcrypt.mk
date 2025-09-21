@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-LIBGCRYPT_VERSION = 1.11.0
+LIBGCRYPT_VERSION = 1.11.1
 LIBGCRYPT_SOURCE = libgcrypt-$(LIBGCRYPT_VERSION).tar.bz2
 LIBGCRYPT_LICENSE = LGPL-2.1+
 LIBGCRYPT_LICENSE_FILES = COPYING.LIB
@@ -16,6 +16,7 @@ LIBGCRYPT_CPE_ID_VENDOR = gnupg
 
 # Patching configure.ac and Makefile.am in 0001
 LIBGCRYPT_AUTORECONF = YES
+LIBGCRYPT_CONF_ENV += GPGRT_CONFIG=$(STAGING_DIR)/usr/bin/gpgrt-config
 LIBGCRYPT_CONF_OPTS = \
 	--disable-tests \
 	$(if $(BR2_OPTIMIZE_0),--disable-ppc-crypto-support,) \

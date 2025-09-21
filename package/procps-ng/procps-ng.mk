@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-PROCPS_NG_VERSION = 4.0.4
+PROCPS_NG_VERSION = 4.0.5
 PROCPS_NG_SOURCE = procps-ng-$(PROCPS_NG_VERSION).tar.xz
 PROCPS_NG_SITE = http://downloads.sourceforge.net/project/procps-ng/Production
 PROCPS_NG_LICENSE = GPL-2.0+, LGPL-2.0+ (libproc and libps)
@@ -13,6 +13,9 @@ PROCPS_NG_CPE_ID_VALID = YES
 PROCPS_NG_INSTALL_STAGING = YES
 PROCPS_NG_DEPENDENCIES = ncurses host-pkgconf $(TARGET_NLS_DEPENDENCIES)
 PROCPS_NG_CONF_OPTS = LIBS=$(TARGET_NLS_LIBS)
+
+# Applying 0001-pgrep-provide-definition-for-nr-pidfd_open.patch touches configure.ac
+PROCPS_NG_AUTORECONF = YES
 
 ifeq ($(BR2_PACKAGE_SYSTEMD),y)
 PROCPS_NG_DEPENDENCIES += systemd
@@ -50,6 +53,10 @@ ifeq ($(BR2_TOOLCHAIN_USES_MUSL),y)
 PROCPS_NG_CONF_OPTS += --disable-w
 else
 PROCPS_NG_CONF_OPTS += --enable-w
+endif
+
+ifeq ($(BR2_PACKAGE_PROCPS_NG_ORIGINAL_TOP),y)
+PROCPS_NG_CONF_OPTS += --disable-modern-top
 endif
 
 # Avoid installing S02sysctl, since openrc provides /etc/init.d/sysctl.

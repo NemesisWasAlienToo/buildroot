@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 die() {
   cat <<EOF >&2
 Error: $@
@@ -54,6 +56,5 @@ if grep -Eq "^BR2_PACKAGE_HOST_BMAP_TOOLS=y$" "${BR2_CONFIG}"; then
 			continue
 		fi
 		bmaptool create "${image_path}" -o "${image_path}.bmap"
-		gzip -c "${image_path}" > "${image_path}.gz"
 	done < <(grep '^image ' "${GENIMAGE_CFG}" | cut -d ' ' -f 2)
 fi

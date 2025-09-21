@@ -1,8 +1,16 @@
-config BR2_TARGET_XILINX_PREBUILT
+menuconfig BR2_TARGET_XILINX_PREBUILT
 	bool "xilinx-prebuilt"
 	depends on BR2_aarch64
 	help
 	  Pre-built firmware files for Xilinx boards.
+
+	  The pre-built firmware applications will only be installed
+	  if they are not being built by the xilinx-embeddedsw
+	  package.
+
+	  Users can mix and match applications to build with
+	  xilinx-embeddedsw and applications to simply install with
+	  xilinx-prebuilt.
 
 	  https://github.com/Xilinx/soc-prebuilt-firmware
 
@@ -10,7 +18,7 @@ if BR2_TARGET_XILINX_PREBUILT
 
 config BR2_TARGET_XILINX_PREBUILT_VERSION
 	string "prebuilt version"
-	default "xilinx_v2024.1"
+	default "xilinx_v2025.1"
 	help
 	  Release version of Xilinx firmware.
 	  Must be xilinx_v2023.1 or newer.
@@ -54,6 +62,15 @@ config BR2_TARGET_XILINX_PREBUILT_VERSAL_XSA_LOCATION
 	  the Buildroot tree.
 
 endif # BR2_TARGET_XILINX_PREBUILT_VERSAL_XSA
+
+config BR2_TARGET_XILINX_PREBUILT_VERSAL_PLD_PDI
+	bool "install versal pld.pdi"
+	depends on BR2_TARGET_XILINX_PREBUILT_VERSAL
+	help
+	  When using the Versal Segmented Configuration, there is a
+	  pld.pdi file containing the FPGA bitstream which can be
+	  loaded at run-time.  By enabling this option, the pld.pdi
+	  will be installed to the target /lib/firmware/xilinx dir.
 
 config BR2_TARGET_XILINX_PREBUILT_FAMILY
 	string

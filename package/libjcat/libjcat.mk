@@ -4,13 +4,15 @@
 #
 ################################################################################
 
-LIBJCAT_VERSION = 0.2.1
+LIBJCAT_VERSION = 0.2.3
 LIBJCAT_SITE = https://github.com/hughsie/libjcat/releases/download/$(LIBJCAT_VERSION)
 LIBJCAT_SOURCE = libjcat-$(LIBJCAT_VERSION).tar.xz
 LIBJCAT_LICENSE = LGPL-2.1+
 LIBJCAT_LICENSE_FILES = LICENSE
 LIBJCAT_INSTALL_STAGING = YES
-LIBJCAT_DEPENDENCIES = host-pkgconf json-glib libglib2
+LIBJCAT_DEPENDENCIES = host-pkgconf json-glib libglib2 $(TARGET_NLS_DEPENDENCIES)
+
+LIBJCAT_LDFLAGS = $(TARGET_NLS_LIBS)
 
 LIBJCAT_CONF_OPTS = \
 	-Dgtkdoc=false \

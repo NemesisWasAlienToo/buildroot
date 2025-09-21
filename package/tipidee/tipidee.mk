@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-TIPIDEE_VERSION = 0.0.5.0
+TIPIDEE_VERSION = 0.0.5.1
 TIPIDEE_SITE = https://skarnet.org/software/tipidee
 TIPIDEE_LICENSE = ISC
 TIPIDEE_LICENSE_FILES = COPYING
@@ -12,7 +12,8 @@ TIPIDEE_DEPENDENCIES = skalibs
 
 TIPIDEE_CONF_OPTS = \
 	--prefix=/usr \
-	--with-sysdeps=$(STAGING_DIR)/lib/skalibs/sysdeps \
+	--sysconfdir=/etc \
+	--with-sysdeps=$(STAGING_DIR)/usr/lib/skalibs/sysdeps \
 	--with-include=$(STAGING_DIR)/include \
 	--with-dynlib=$(STAGING_DIR)/lib \
 	--with-lib=$(STAGING_DIR)/lib/skalibs \

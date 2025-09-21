@@ -143,7 +143,7 @@ fi
 
 # Check bash
 # We only check bash is available, setting SHELL appropriately is done
-# in the top-level Makefile, and we mimick the same sequence here
+# in the top-level Makefile, and we mimic the same sequence here
 if   [ -n "${BASH}" ]; then :
 elif [ -x /bin/bash ]; then :
 elif [ -z "$( sh -c 'echo $BASH' )" ]; then
@@ -154,7 +154,7 @@ fi
 
 # Check that a few mandatory programs are installed
 missing_progs="no"
-for prog in perl tar wget cpio unzip rsync bc cmp find xargs ${DL_TOOLS} ; do
+for prog in perl tar wget cpio unzip rsync bc cmp find xargs awk ${DL_TOOLS} ; do
 	if ! which $prog > /dev/null ; then
 		echo "You must install '$prog' on your build machine";
 		missing_progs="yes"

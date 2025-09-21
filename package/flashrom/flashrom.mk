@@ -4,17 +4,19 @@
 #
 ################################################################################
 
-FLASHROM_VERSION = 1.4.0-rc2
+FLASHROM_VERSION = 1.5.1
 FLASHROM_SITE = $(call github,flashrom,flashrom,v$(FLASHROM_VERSION))
 FLASHROM_LICENSE = GPL-2.0+
 FLASHROM_LICENSE_FILES = COPYING
 FLASHROM_INSTALL_STAGING = YES
 FLASHROM_CONF_OPTS = \
-	-Dclassic_cli_print_wiki=disabled \
+	-Dclassic_cli=enabled \
 	-Dich_descriptors_tool=enabled \
 	-Dtests=disabled \
 	-Duse_internal_dmi=true \
-	-Dwerror=false
+	-Dwerror=false \
+	-Dman-pages=disabled \
+	-Ddocumentation=disabled
 
 FLASHROM_PROGRAMMERS = \
 	buspirate_spi \
@@ -78,10 +80,8 @@ endif
 
 FLASHROM_CONF_OPTS += -Dprogrammer=$(subst $(space),$(comma),$(strip $(FLASHROM_PROGRAMMERS)))
 
-ifeq ($(BR2_SHARED_LIBS),)
-FLASHROM_CONF_OPTS += -Dclassic_cli=enabled
-else
-FLASHROM_CONF_OPTS += -Dclassic_cli=disabled
+ifeq ($(BR2_SHARED_LIBS),y)
+FLASHROM_CONF_OPTS += --default-library=both
 endif
 
 $(eval $(meson-package))

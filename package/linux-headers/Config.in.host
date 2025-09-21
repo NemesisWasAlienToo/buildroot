@@ -3,7 +3,7 @@ comment "Kernel Header Options"
 choice
 	prompt "Kernel Headers"
 	default BR2_KERNEL_HEADERS_AS_KERNEL if BR2_LINUX_KERNEL
-	default BR2_KERNEL_HEADERS_6_10
+	default BR2_KERNEL_HEADERS_6_16
 	help
 	  Select the kernel version to get headers from.
 
@@ -24,20 +24,22 @@ config BR2_KERNEL_HEADERS_AS_KERNEL
 	depends on BR2_LINUX_KERNEL
 	select BR2_KERNEL_HEADERS_LATEST if BR2_LINUX_KERNEL_LATEST_VERSION
 
-config BR2_KERNEL_HEADERS_4_19
-	bool "Linux 4.19.x kernel headers"
-	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_4_19
-
 config BR2_KERNEL_HEADERS_5_4
 	bool "Linux 5.4.x kernel headers"
+	# Support was introduced in Linux 5.19
+	depends on !BR2_loongarch64
 	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_5_4
 
 config BR2_KERNEL_HEADERS_5_10
 	bool "Linux 5.10.x kernel headers"
+	# Support was introduced in Linux 5.19
+	depends on !BR2_loongarch64
 	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_5_10
 
 config BR2_KERNEL_HEADERS_5_15
 	bool "Linux 5.15.x kernel headers"
+	# Support was introduced in Linux 5.19
+	depends on !BR2_loongarch64
 	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_5_15
 
 config BR2_KERNEL_HEADERS_6_1
@@ -48,13 +50,13 @@ config BR2_KERNEL_HEADERS_6_6
 	bool "Linux 6.6.x kernel headers"
 	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_6
 
-config BR2_KERNEL_HEADERS_6_9
-	bool "Linux 6.9.x kernel headers"
-	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_9
+config BR2_KERNEL_HEADERS_6_12
+	bool "Linux 6.12.x kernel headers"
+	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_12
 
-config BR2_KERNEL_HEADERS_6_10
-	bool "Linux 6.10.x kernel headers"
-	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_10
+config BR2_KERNEL_HEADERS_6_16
+	bool "Linux 6.16.x kernel headers"
+	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_16
 	select BR2_KERNEL_HEADERS_LATEST
 
 config BR2_KERNEL_HEADERS_VERSION
@@ -117,6 +119,7 @@ endif
 
 choice
 	bool "Custom kernel headers series"
+	default BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_REALLY_OLD
 	depends on !BR2_LINUX_KERNEL_LATEST_VERSION || !BR2_KERNEL_HEADERS_AS_KERNEL
 	depends on !BR2_LINUX_KERNEL_LATEST_CIP_VERSION || !BR2_KERNEL_HEADERS_AS_KERNEL
 	depends on !BR2_LINUX_KERNEL_LATEST_CIP_RT_VERSION || !BR2_KERNEL_HEADERS_AS_KERNEL
@@ -132,8 +135,32 @@ choice
 	  If your kernel headers are more recent than the latest version
 	  in the choice, then select the latest version.
 
+config BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_16
+	bool "6.16.x or later"
+	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_16
+
+config BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_15
+	bool "6.15.x"
+	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_15
+
+config BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_14
+	bool "6.14.x"
+	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_14
+
+config BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_13
+	bool "6.13.x"
+	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_13
+
+config BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_12
+	bool "6.12.x"
+	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_12
+
+config BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_11
+	bool "6.11.x"
+	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_11
+
 config BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_10
-	bool "6.10.x or later"
+	bool "6.10.x"
 	select BR2_TOOLCHAIN_HEADERS_AT_LEAST_6_10
 
 config BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_9
@@ -427,14 +454,13 @@ endchoice
 
 config BR2_DEFAULT_KERNEL_HEADERS
 	string
-	default "4.19.319"	if BR2_KERNEL_HEADERS_4_19
-	default "5.4.281"	if BR2_KERNEL_HEADERS_5_4
-	default "5.10.223"	if BR2_KERNEL_HEADERS_5_10
-	default "5.15.164"	if BR2_KERNEL_HEADERS_5_15
-	default "6.1.102"	if BR2_KERNEL_HEADERS_6_1
-	default "6.6.43"	if BR2_KERNEL_HEADERS_6_6
-	default "6.9.12"	if BR2_KERNEL_HEADERS_6_9
-	default "6.10.2"	if BR2_KERNEL_HEADERS_6_10
+	default "5.4.299"	if BR2_KERNEL_HEADERS_5_4
+	default "5.10.244"	if BR2_KERNEL_HEADERS_5_10
+	default "5.15.193"	if BR2_KERNEL_HEADERS_5_15
+	default "6.1.152"	if BR2_KERNEL_HEADERS_6_1
+	default "6.6.106"	if BR2_KERNEL_HEADERS_6_6
+	default "6.12.47"	if BR2_KERNEL_HEADERS_6_12
+	default "6.16.7"	if BR2_KERNEL_HEADERS_6_16
 	default BR2_DEFAULT_KERNEL_VERSION if BR2_KERNEL_HEADERS_VERSION
 	default "custom"	if BR2_KERNEL_HEADERS_CUSTOM_TARBALL
 	default BR2_KERNEL_HEADERS_CUSTOM_REPO_VERSION \

@@ -4,12 +4,22 @@
 #
 ################################################################################
 
-PYTHON_DJANGO_VERSION = 5.0.3
-PYTHON_DJANGO_SOURCE = Django-$(PYTHON_DJANGO_VERSION).tar.gz
+PYTHON_DJANGO_VERSION = 5.2.6
+PYTHON_DJANGO_SOURCE = django-$(PYTHON_DJANGO_VERSION).tar.gz
 # The official Django site has an unpractical URL
-PYTHON_DJANGO_SITE = https://files.pythonhosted.org/packages/e1/b1/ac6a16aaf0049637b50afbcf06b8ec2fa5c6ce42d4ae6ba66bbaf4c3609a
-PYTHON_DJANGO_LICENSE = BSD-3-Clause
-PYTHON_DJANGO_LICENSE_FILES = LICENSE
+PYTHON_DJANGO_SITE = https://files.pythonhosted.org/packages/4c/8c/2a21594337250a171d45dda926caa96309d5136becd1f48017247f9cdea0
+PYTHON_DJANGO_LICENSE = BSD-3-Clause, MIT (jquery, utils/archive.py), BSD-2-Clause (inlines.js)
+PYTHON_DJANGO_LICENSE_FILES = LICENSE \
+	django/contrib/gis/measure.py \
+	django/contrib/gis/gdal/LICENSE \
+	django/contrib/gis/geos/LICENSE \
+	django/contrib/admin/static/admin/js/inlines.js \
+	django/contrib/admin/static/admin/js/vendor/jquery/LICENSE.txt \
+	django/contrib/admin/static/admin/js/vendor/select2/LICENSE.md \
+	django/contrib/admin/static/admin/js/vendor/xregexp/LICENSE.txt \
+	django/contrib/admin/static/admin/img/LICENSE \
+	django/dispatch/license.txt \
+	django/utils/archive.py
 PYTHON_DJANGO_CPE_ID_VENDOR = djangoproject
 PYTHON_DJANGO_CPE_ID_PRODUCT = django
 PYTHON_DJANGO_SETUP_TYPE = setuptools

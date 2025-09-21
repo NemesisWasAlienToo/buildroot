@@ -4,16 +4,13 @@
 #
 ################################################################################
 
-ZFS_VERSION = 2.2.4
+ZFS_VERSION = 2.3.4
 ZFS_SITE = https://github.com/openzfs/zfs/releases/download/zfs-$(ZFS_VERSION)
 ZFS_SELINUX_MODULES = zfs
 ZFS_LICENSE = CDDL
 ZFS_LICENSE_FILES = LICENSE COPYRIGHT
 ZFS_CPE_ID_VENDOR = openzfs
 ZFS_CPE_ID_PRODUCT = openzfs
-
-# 0001-tests-cp_files-ignore-if-SEEK_DATA-is-not-defined.patch
-ZFS_AUTORECONF = YES
 
 ZFS_DEPENDENCIES = libaio openssl udev util-linux zlib libcurl linux
 

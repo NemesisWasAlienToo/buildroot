@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-XZ_VERSION = 5.6.2
+XZ_VERSION = 5.8.1
 XZ_SOURCE = xz-$(XZ_VERSION).tar.bz2
 XZ_SITE = https://github.com/tukaani-project/xz/releases/download/v$(XZ_VERSION)
 XZ_INSTALL_STAGING = YES
@@ -67,6 +67,15 @@ HOST_XZ_CONF_OPTS = \
 HOST_XZ_CONF_ENV = \
 	CC="$(HOSTCC_NOCCACHE)" \
 	CXX="$(HOSTCXX_NOCCACHE)"
+
+# We need to prevent XZ_AUTORECONF for host builds or we end up with a
+# circular dependency. Since the autoconf build needs to extract a
+# tar.xz archive, autoconf has an implicit dependency on HOST_XZ. By
+# enabling XZ_AUTORECONF we also make host-xz depend on autoconf,
+# which we can't do. It is also not necessary as we're autoreconfuring
+# the target package to fix static build with musl, which is
+# irrelevant for the host package.
+HOST_XZ_AUTORECONF = NO
 
 $(eval $(autotools-package))
 $(eval $(host-autotools-package))

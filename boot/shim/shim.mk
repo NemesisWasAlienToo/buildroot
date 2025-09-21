@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-SHIM_VERSION = 15.8
+SHIM_VERSION = 16.0
 SHIM_SITE = https://github.com/rhboot/shim/releases/download/$(SHIM_VERSION)
 SHIM_SOURCE = shim-$(SHIM_VERSION).tar.bz2
 SHIM_LICENSE = BSD-2-Clause
@@ -22,7 +22,7 @@ SHIM_MAKE_OPTS = \
 
 # shim has some assembly function that is not present in Thumb mode:
 # Error: selected processor does not support `mrc p15,0,r2,c9,c13,0' in Thumb mode
-# so, we desactivate Thumb mode
+# so, we deactivate Thumb mode
 ifeq ($(BR2_ARM_INSTRUCTIONS_THUMB),y)
 SHIM_CFLAGS += -marm
 endif

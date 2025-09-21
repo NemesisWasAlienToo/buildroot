@@ -12,11 +12,15 @@ NET_TOOLS_LICENSE = GPL-2.0+
 NET_TOOLS_LICENSE_FILES = COPYING
 NET_TOOLS_CPE_ID_VALID = YES
 
+# 0001-CVE-2025-46836-interface.c-Stack-based-Buffer-Overfl.patch
+# 0002-CVE-2025-46836-interface-statistic-regression.patch
+NET_TOOLS_IGNORE_CVES += CVE-2025-46836
+
 define NET_TOOLS_CONFIGURE_CMDS
 	(cd $(@D); yes "" | ./configure.sh config.in )
 endef
 
-# Enable I18N when appropiate
+# Enable I18N when appropriate
 ifeq ($(BR2_SYSTEM_ENABLE_NLS),y)
 define NET_TOOLS_ENABLE_I18N
 	$(SED) 's:I18N 0:I18N 1:' $(@D)/config.h
