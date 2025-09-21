@@ -18,9 +18,6 @@ BR2_TARGET_UBOOT_NEEDS_IMX_FIRMWARE=y
 
 BR2_TARGET_UBOOT=y
 BR2_TARGET_UBOOT_BUILD_SYSTEM_KCONFIG=y
-# BR2_TARGET_UBOOT_CUSTOM_TARBALL=y
-# BR2_TARGET_UBOOT_CUSTOM_TARBALL_LOCATION="$(call github,NemesisWasAlienToo,u-boot,v2024.08-rc1)/u-boot-2024.08-rc1.tar.gz"
-# BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION="refs/tags/v2024.08-rc1"
 BR2_TARGET_UBOOT_CUSTOM_GIT=y
 BR2_TARGET_UBOOT_CUSTOM_REPO_URL="https://github.com/NemesisWasAlienToo/u-boot.git"
 BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION="u-boot-pimx"
@@ -54,8 +51,6 @@ BR2_ROOTFS_OVERLAY="board/freescale/pimx/rootfs_overlay"
 # -----------------------------------------------------------------------------
 
 BR2_LINUX_KERNEL=y
-# BR2_LINUX_KERNEL_CUSTOM_TARBALL=y
-# BR2_LINUX_KERNEL_CUSTOM_TARBALL_LOCATION="$(call github,nxp-imx,linux-imx,lf-6.6.23-2.0.0)/linux-imx-lf-6.6.23-2.0.0.tar.gz"
 BR2_LINUX_KERNEL_CUSTOM_GIT=y
 BR2_LINUX_KERNEL_CUSTOM_REPO_URL="https://github.com/NemesisWasAlienToo/linux-imx.git"
 BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION="lf-6.6.y-pimx"
